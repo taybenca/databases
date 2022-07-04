@@ -1,10 +1,20 @@
 require_relative 'lib/database_connection'
+require_relative 'lib/artist_repository'
+require_relative 'lib/album_repository'
 
 DatabaseConnection.connect('music_library')
 
-sql = 'SELECT id, title FROM albums;'
-result = DatabaseConnection.exec_params(sql, [])
+album_repository = AlbumRepository.new
 
-result.each do |record|
-    p record
+album_repository.all.each do |album|
+    p album.title
 end
+
+
+# artist_repository = ArtistRepository.new
+
+# artist_repository.all.each do |artist|
+#     p artist
+# end
+
+
