@@ -117,10 +117,17 @@ class AlbumRepository
   # No arguments
   def all
     # Executes the SQL query:
-    # SELECT id, title, releas_year, artist_id FROM albums;
-
+    # SELECT id, title, release_year, artist_id FROM albums;
     # Returns an array of Album objects.
   end
+ 
+  def find(id)
+    # Selecting only one record
+    # argument = id (number)
+    # SELECT id, title, release_year, artist_id FROM albums WHERE id = $3
+    # Returns the data of the record with id = 3
+  end
+
 end
 ```
 
@@ -144,6 +151,8 @@ albums.first.id # => '1'
 albums.first.title # => 'Abbey Road'
 albums.last.release_year # => '2021'
 
+album = repo.find(3) # => '3', title, release year, artist_id
+
 
 
 Encode this example as a test.
@@ -154,7 +163,7 @@ Running the SQL code present in the seed file will empty the table and re-insert
 
 This is so you get a fresh table contents every time you run the test suite.
 
-```ruby
+````ruby
 # EXAMPLE
 
 # file: spec/student_repository_spec.rb

@@ -14,9 +14,17 @@ describe AlbumRepository do
     it "returns all albums" do
         repo = AlbumRepository.new
         albums = repo.all
-        expect(albums.length).to eq 2
+        expect(albums.length).to eq 3
         expect(albums.first.id).to eq '1'
         expect(albums.first.title).to eq 'Abbey Road'
-        expect(albums.last.release_year).to eq '2021'
+        expect(albums.last.release_year).to eq '1991'
+    end
+
+    it 'return only the record with id 3' do
+        repo = AlbumRepository.new
+        album = repo.find(3)
+        expect(album.title).to eq 'Nevermind'
+        expect(album.release_year).to eq '1991'
+        expect(album.artist_id).to eq '8'
     end
 end
