@@ -59,7 +59,7 @@ release_year: int
 
 -- Replace the table name, columm names and types.
 
-CREATE TABLE albums (
+CREATE TABLE movies (
   id SERIAL PRIMARY KEY,
   title text,
   genre text,
