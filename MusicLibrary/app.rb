@@ -7,7 +7,8 @@ DatabaseConnection.connect('music_library')
 album_repository = AlbumRepository.new
 artist_repository = ArtistRepository.new
 
-#album_repository.find(3)
+album = album_repository.find(3)
+puts "#{album.id}. #{album.title}, #{album.release_year}. ArtistID: #{album.artist_id}"
 
 album_repository.all.each do |album|
     puts album.title
