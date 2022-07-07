@@ -128,6 +128,11 @@ class AlbumRepository
     # Returns the data of the record with id = 3
   end
 
+  def create(album)
+  argument = title, release_year, artist_id
+  returns nil
+  sql = INSERT INTO albums(argument) VALUES ($1, $2, $3)
+
 end
 ```
 
@@ -152,6 +157,17 @@ albums.first.title # => 'Abbey Road'
 albums.last.release_year # => '2021'
 
 album = repo.find(3) # => '3', title, release year, artist_id
+
+
+repo = AlbumRepository.new
+album = album.new
+album.title = 'Trompe le Monde'
+album.release_year = 1991
+album.artist_id = 1
+
+repo.create(album)
+
+all_albums = repo.all
 
 
 
