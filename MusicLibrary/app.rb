@@ -16,11 +16,11 @@ class Application < Sinatra::Base
 
   get '/albums' do
     repo = AlbumRepository.new
-    albums = repo.all
-
-    response = albums.map do |album|
-      album.title
-    end.join(', ')
+    @albums = repo.all
+    return erb(:album)
+    # response = albums.map do |album|
+    #   album.title
+    # end.join(', ')
   end
   
   post '/albums' do

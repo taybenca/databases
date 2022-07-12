@@ -31,10 +31,13 @@ describe Application do
   context "GET /albums" do
     it 'returns 200 OK and all the albums' do
       response = get('/albums')
-      expected_response = "Doolittle, Surfer Rosa, Waterloo, Super Trouper, Bossanova, Lover, Folklore, I Put a Spell on You, Baltimore, Here Comes the Sun, Fodder on My Wings, Ring Ring"
 
       expect(response.status).to eq(200)
-      expect(response.body).to eq (expected_response)
+      expect(response.body).to include("<h1>Albums</h1>")
+      expect(response.body).to include("Doolittle")
+      expect(response.body).to include("1989")
+      expect(response.body).to include("Fodder on My Wings")
+      expect(response.body).to include("1982")
     end
   end
 
@@ -80,10 +83,8 @@ describe Application do
 
       expect(response.status).to eq(200)
       expect(response.body).to include("<h1>Doolittle</h1>")
-    #   expect(response.body).to include("<p>
-    #   Release year: 1989
-    #   Artist: Pixies
-    # </p>")
+      expect(response.body).to include("Release year: 1989")
+      expect(response.body).to include("Artist: Pixies")
     end
 
     it "returns 200 OK and the correct album content" do
@@ -91,10 +92,8 @@ describe Application do
 
       expect(response.status).to eq(200)
       expect(response.body).to include("<h1>Surfer Rosa</h1>")
-    #   expect(response.body).to include("<p>
-    #   Release year: 1988
-    #   Artist: Pixies
-    # </p>")
+      expect(response.body).to include("Release year: 1988")
+      expect(response.body).to include("Artist: Pixies")
     end
   end 
 end
