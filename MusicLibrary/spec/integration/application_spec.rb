@@ -33,11 +33,10 @@ describe Application do
       response = get('/albums')
 
       expect(response.status).to eq(200)
-      expect(response.body).to include("<h1>Albums</h1>")
-      expect(response.body).to include("Doolittle")
-      expect(response.body).to include("1989")
-      expect(response.body).to include("Fodder on My Wings")
-      expect(response.body).to include("1982")
+      expect(response.body).to include('<h1>Albums</h1>')
+      expect(response.body).to include('Title: Doolittle')
+      expect(response.body).to include('<a href="/albums/2">')
+      expect(response.body).to include('<a href="/albums/3">')
     end
   end
 
