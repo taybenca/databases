@@ -35,4 +35,24 @@ describe Application do
       expect(response.body).to include('Voyage')
     end
   end
+
+  context "GET /artists" do
+    it 'returns 200 OK and the correct content' do
+      response = get('/artists')
+      expect(response.status).to eq(200)
+      expect(response.body).to eq "Pixies, ABBA, Taylor Swift, Nina Simone, Kiasmos"
+    end
+  end
+
+  context "POST /artists and GET /artists" do
+    it 'returns 200 OK, creates an artist and return the total of artists' do 
+      response = post('/artists', name: 'Wilde nothing', genre: 'Indie')
+      expect(response.status).to eq(200)
+      expect(response.body). to eq('')
+
+      response = get('/artists')
+      expect(response.body).to include("Wilde nothing")
+      expect(response.body).to eq "Pixies, ABBA, Taylor Swift, Nina Simone, Kiasmos, Wilde nothing"
+    end
+  end
 end
