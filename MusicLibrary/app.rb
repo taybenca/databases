@@ -18,7 +18,7 @@ class Application < Sinatra::Base
   get '/albums' do
     repo = AlbumRepository.new
     @albums = repo.all
-    return erb(:album)
+    return erb(:albums)
   end
   
   # Create a new album
@@ -39,14 +39,14 @@ class Application < Sinatra::Base
     @album = repo.find(id_to_find)
     repo = ArtistRepository.new
     @artist = repo.find(@album.artist_id)
-    return erb(:album_id)
+    return erb(:albums_id)
   end
 
   # View all artists
   get '/artists' do
     repo = ArtistRepository.new
     @artists = repo.all
-    return erb(:artist)
+    return erb(:artists)
   end
 
   # Create an Artist
@@ -64,6 +64,6 @@ class Application < Sinatra::Base
     repo = ArtistRepository.new
     id_to_find = params[:id]
     @artist = repo.find(id_to_find)
-    return erb(:artist_id)
+    return erb(:artists_id)
   end
 end
