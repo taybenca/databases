@@ -40,6 +40,26 @@ describe Application do
     end
   end
 
+  context "GET /album/new" do
+    it 'returns 200 OK and shows the forms' do
+      response = get("/album/new")
+      expect(response.status).to eq (200)
+      expect(response.body).to include('Create the album')
+      expect(response.body).to include('<form action="/albums" method="POST">')
+      expect(response.body).to include('<h1>Add an album</h1>')
+    end
+  end
+
+  context "GET /artist/new" do
+    it 'returns 200 OK and shows the forms' do
+      response = get("/artist/new")
+      expect(response.status).to eq (200)
+      expect(response.body).to include('Create the artist')
+      expect(response.body).to include('<form action="/artists" method="POST">')
+      expect(response.body).to include('<h1>Add an artist</h1>')
+    end
+  end
+
   context "POST /albums" do
     it 'returns 200 OK and create a new album' do
       response = post(
@@ -49,10 +69,23 @@ describe Application do
         artist_id: '2'
         )
       expect(response.status).to eq(200)
-      expect(response.body).to eq('')
 
-      response = get('/albums')
-      expect(response.body).to include('Voyage')
+      response = post('/albums')
+      expect(response.body).to include('<h1>Your album was added!</h1>')
+    end
+  end
+
+  context "POST /artists" do
+    it 'returns 200 OK and create a new artist' do
+      response = post(
+        '/artists', 
+        name: 'Gogi', 
+        genre: 'Pop'
+        )
+      expect(response.status).to eq(200)
+
+      response = post('/artists')
+      expect(response.body).to include('<h1>Your artist was added!</h1>')
     end
   end
 
@@ -64,18 +97,6 @@ describe Application do
       expect(response.body).to include("Name: ABBA")
       expect(response.body).to include("Name: Taylor Swift")
       expect(response.body).to include("Name: Nina Simone")
-    end
-  end
-
-  context "POST /artists and GET /artists" do
-    it 'returns 200 OK, creates an artist and return the total of artists' do 
-      response = post('/artists', name: 'Wilde nothing', genre: 'Indie')
-      expect(response.status).to eq(200)
-      expect(response.body). to eq('')
-
-      # response = get('/artists')
-      # expect(response.body).to include("Wilde nothing")
-      # expect(response.body).to eq "Pixies, ABBA, Taylor Swift, Nina Simone, Wilde nothing"
     end
   end
 

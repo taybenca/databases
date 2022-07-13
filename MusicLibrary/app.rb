@@ -29,7 +29,7 @@ class Application < Sinatra::Base
     new_album.release_year = params[:release_year]
     new_album.artist_id = params[:artist_id]
     repo.create(new_album)
-    return ''
+    return erb(:album_post)
   end
 
   # View a specific album
@@ -40,6 +40,13 @@ class Application < Sinatra::Base
     repo = ArtistRepository.new
     @artist = repo.find(@album.artist_id)
     return erb(:albums_id)
+  end
+
+  get '/album/new' do 
+    repo = AlbumRepository.new 
+    @new_album = Album.new 
+
+    return erb(:album_new)
   end
 
   # View all artists
@@ -53,10 +60,18 @@ class Application < Sinatra::Base
   post '/artists' do
     repo = ArtistRepository.new
     new_artist = Artist.new
+    new_artist.id = params[:id]
     new_artist.name = params[:name]
     new_artist.genre = params[:genre]
     repo.create(new_artist)
-    return ''
+    return erb(:artist_post)
+  end
+
+  get '/artist/new' do 
+    repo = ArtistRepository.new 
+    @new_album = Artist.new 
+
+    return erb(:artist_new)
   end
 
   # View a specific Artist
